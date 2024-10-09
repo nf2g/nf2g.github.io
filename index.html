@@ -101,52 +101,7 @@
       <input type="number" id="quantity" value="0">
     </div>
 
-    <div class="result">
-      <label for="quantity">Итого (база без НДС):</label>
-      <input type="number" id="totalPrice" value="0">
-    </div>
-
-    <script>
-      const basePriceInput = document.getElementById('basePrice');
-      const physicalPriceInput = document.getElementById('physicalPrice');
-      const quantityInput = document.getElementById('quantity');
-      const totalPriceSpan = document.getElementById('totalPrice');
-
-      function calculateTotalPrice() {
-        const basePrice = parseFloat(basePriceInput.value) || 0;
-        const physicalPrice = parseFloat(physicalPriceInput.value) || 0;
-        const quantity = parseFloat(quantityInput.value) || 0;
-        const totalPrice = (basePrice + physicalPrice) * quantity;
-        totalPriceSpan.textContent = totalPrice.toFixed(2); 
-      }
-
-      basePriceInput.addEventListener('input', calculateTotalPrice);
-      physicalPriceInput.addEventListener('input', calculateTotalPrice);
-      quantityInput.addEventListener('input', calculateTotalPrice);
-
-      calculateTotalPrice();
-    </script>
-  </div>
-
-   <div class="container">
-    <h2>СЧИТАЕМ ФИЗИЧЕСКУЮ ЦЕНУ</h2>
-
     <div class="input-group">
-      <label for="basePrice">Физвес с НДС:</label>
-      <input type="number" id="basePrice" value="0">
-    </div>
-
-    <div class="input-group">
-      <label for="physicalPrice">Белок факт:</label>
-      <input type="number" id="physicalPrice" value="0">
-    </div>
-
-    <div class="input-group">
-      <label for="quantity">Жир Факт:</label>
-      <input type="number" id="quantity" value="0">
-    </div>
-
-    <div class="result">
       <label for="quantity">Итого (база без НДС):</label>
       <input type="number" id="totalPrice" value="0">
     </div>
