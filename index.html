@@ -8,6 +8,7 @@
     body {
       font-family: 'Arial', sans-serif;
       display: flex;
+      flex-direction: row;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
@@ -18,11 +19,25 @@
     .container {
       background-color: #fff;
       padding: 20px;
+      flex: 1;
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       width: 90%;
       max-width: 400px;
       background-color: #E4E3E3;
+      margin: 2%;
+    }
+
+    .container1 {
+      background-color: #fff;
+      padding: 20px;
+      flex: 1;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
+      background-color: #E4E3E3;
+      margin: 2%;
     }
 
     h2 {
@@ -82,9 +97,17 @@
       color: #E32636;
     }
 
-    @media (max-width: 450px) {
+    @media (max-width: 750px) {
+      body {
+      flex-direction: column;
+    }
       .container {
         width: 95%;
+        order: 1;
+      }
+      .container1 {
+        width: 95%;
+        order: 2;
       }
     }
   </style>
@@ -117,7 +140,7 @@
       function validateInput(event) {
   const key = event.key;
   const allowedKeys = ["Backspace", "Delete", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Tab"];
-  if (allowedKeys.includes(key) || (key >= "0" && key <= "9") || key == ".") {
+  if (allowedKeys.includes(key) || (key >= "0" && key <= "9") || key == "." || key == ",") {
     return true;
   } else {
     event.preventDefault();
@@ -147,6 +170,56 @@
       quantityInput.addEventListener('input', calculateTotalPrice);
 
       calculateTotalPrice();
+    </script>
+  </div>
+
+  <div class="container1">
+    <h2>СЧИТАЕМ <span style="color: #E32636">ФИЗИЧЕСКУЮ</span> ЦЕНУ</h2>
+
+    <div class="result">
+      <label for="result11">Физвес с НДС:</label>
+      <input type="number" id="result11" value="0" onkeypress="validateInput(event)">
+    </div>
+
+    <div class="input-group">
+      <label for="value11">Белок факт:</label>
+      <input type="number" id="value11" value="3.1" onkeypress="validateInput(event)">
+    </div>
+
+    <div class="input-group">
+      <label for="value21">Жир Факт:</label>
+      <input type="number" id="value21" value="3.8" onkeypress="validateInput(event)">
+    </div>
+
+    <div class="input-group">
+      <label for="value31">Итого (база без НДС):</label>
+      <input type="text" id="value31"  value="36.0" readonly onkeypress="validateInput(event)">
+    </div>
+
+    <script>
+      const totalPriceSpan1 = document.getElementById('result11');
+      const basePriceInput1 = document.getElementById('value11');
+      const physicalPriceInput1 = document.getElementById('value21');
+      const quantityInput1 = document.getElementById('value31');
+
+      function calculateTotalPrice1() {
+        const basePrice1 = parseFloat(basePriceInput1.value) || 0;
+        const physicalPrice1 = parseFloat(physicalPriceInput1.value) || 0;
+        const quantity1 = parseFloat(quantityInput1.value) || 0;
+        const totalPrice1 = ((quantity1/3*basePrice1)*0.6+(quantity1/3.4*physicalPrice1)*0.4)*1.1; //((RC[3]/3*RC[1])*0,6+(RC[3]/3,4*RC[2])*0,4)*1,1
+        if(isNaN(totalPrice1) || !isFinite(totalPrice1)){
+          totalPriceSpan1.value = 0;
+        }
+        else{
+          totalPriceSpan1.value = totalPrice1.toFixed(2); 
+        }
+      }
+
+      basePriceInput1.addEventListener('input', calculateTotalPrice1);
+      physicalPriceInput1.addEventListener('input', calculateTotalPrice1);
+      quantityInput1.addEventListener('input', calculateTotalPrice1);
+
+      calculateTotalPrice1();
     </script>
   </div>
 </body>
